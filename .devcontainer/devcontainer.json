@@ -1,0 +1,80 @@
+{
+  "name": "Forensic Ledger Guardian Dev Environment",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "remoteUser": "node",
+  "updateRemoteUserUID": true,
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "dsznajder.es7-react-js-snippets",
+        "bradlc.vscode-tailwindcss",
+        "NomicFoundation.hardhat-solidity",
+        "GitHub.copilot"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "eslint.run": "onSave",
+        "eslint.validate": [
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact"
+        ],
+        "eslint.format.enable": false,
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "typescript.tsserver.maxTsServerMemory": 1024,
+        "typescript.disableAutomaticTypeAcquisition": true,
+        "typescript.enablePromptUseWorkspaceTsdk": false,
+        "files.watcherExclude": {
+          "**/node_modules/**": true,
+          "**/dist/**": true,
+          "**/build/**": true,
+          "**/artifacts/**": true,
+          "**/cache/**": true,
+          "**/.git/**": true
+        },
+        "search.exclude": {
+          "**/node_modules/**": true,
+          "**/dist/**": true,
+          "**/build/**": true,
+          "**/artifacts/**": true
+        },
+        "files.associations": {
+          "*.sol": "solidity"
+        },
+        "solidity.defaultCompiler": "localNodeModule",
+        "solidity.compileUsingRemoteVersion": "v0.8.29",
+        "git.autorefresh": false,
+        "git.path": "/usr/bin/git",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+  "postCreateCommand": ".devcontainer/post-create.sh",
+  "remoteEnv": {
+    "NODE_ENV": "development"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest"
+    }
+  },
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
+  ],
+  "runArgs": [
+    "--init"
+  ]
+}
