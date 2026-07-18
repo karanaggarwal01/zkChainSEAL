@@ -254,39 +254,73 @@ class Web3Service {
     return this.account;
   }
 
+  // public async getUserRole(): Promise<Role> {
+  //   if (!this.contract || !this.account) {
+  //     console.log("getUserRole: No contract or account available");
+  //     return Role.None;
+  //   }
+
+  //   try {
+  //     console.log(`getUserRole: Checking role for account ${this.account}`);
+  //     const roleRaw = await this.contract.getGlobalRole(this.account);
+  //     const role = this.toNumber(roleRaw) as Role;
+  //     console.log(
+  //       `getUserRole: Account ${
+  //         this.account
+  //       } has blockchain role ${this.getRoleString(
+  //         role
+  //       )} (raw value: ${roleRaw})`
+  //     );
+
+  //     // Additional debugging
+  //     const owner = await this.contract.owner();
+  //     console.log(`getUserRole: Contract owner is ${owner}`);
+  //     console.log(
+  //       `getUserRole: Current account is owner: ${
+  //         owner.toLowerCase() === this.account.toLowerCase()
+  //       }`
+  //     );
+
+  //     return role;
+  //   } catch (error) {
+  //     console.error("getUserRole: Error getting user role:", error);
+  //     return Role.None;
+  //   }
+  // }
+
   public async getUserRole(): Promise<Role> {
-    if (!this.contract || !this.account) {
-      console.log("getUserRole: No contract or account available");
-      return Role.None;
-    }
-
-    try {
-      console.log(`getUserRole: Checking role for account ${this.account}`);
-      const roleRaw = await this.contract.getGlobalRole(this.account);
-      const role = this.toNumber(roleRaw) as Role;
-      console.log(
-        `getUserRole: Account ${
-          this.account
-        } has blockchain role ${this.getRoleString(
-          role
-        )} (raw value: ${roleRaw})`
-      );
-
-      // Additional debugging
-      const owner = await this.contract.owner();
-      console.log(`getUserRole: Contract owner is ${owner}`);
-      console.log(
-        `getUserRole: Current account is owner: ${
-          owner.toLowerCase() === this.account.toLowerCase()
-        }`
-      );
-
-      return role;
-    } catch (error) {
-      console.error("getUserRole: Error getting user role:", error);
-      return Role.None;
-    }
+  if (!this.contract || !this.account || !this.provider) {
+    console.log("No contract/provider/account");
+    return Role.None;
   }
+
+  try {
+    const network = await this.provider.getNetwork();
+
+    console.log("========== DEBUG ==========");
+    console.log("Chain:", network.chainId.toString());
+    console.log("Account:", this.account);
+    console.log("Contract:", await this.contract.getAddress());
+
+    const code = await this.provider.getCode(await this.contract.getAddress());
+    console.log("Code length:", code.length);
+
+    const owner = await this.contract.owner();
+    console.log("Owner:", owner);
+
+    const role = await this.contract.getGlobalRole(this.account);
+    console.log("Role:", role);
+
+    console.log("===========================");
+
+    return Number(role) as Role;
+
+  } catch (e) {
+    console.error(e);
+    return Role.None;
+  }
+}
+  
 
   public async getUserCaseRole(caseId: string): Promise<Role> {
     if (!this.contract || !this.account) return Role.None;

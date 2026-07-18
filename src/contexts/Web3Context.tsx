@@ -31,7 +31,8 @@ interface Web3ContextType {
   chainId: string | null;
   networkName: string;
   isCorrectNetwork: boolean;
-  connectWallet: () => Promise<void>;
+  // connectWallet: () => Promise<void>;
+  connectWallet: () => Promise<string | null>;
   disconnectWallet: () => void;
   refreshRole: () => Promise<void>;
   checkRoleAccess: (requiredRole: Role) => boolean;
@@ -51,12 +52,20 @@ const SUPPORTED_NETWORKS: Record<string, NetworkInfo> = {
     rpcUrls: ["https://mainnet.infura.io/v3/"],
     blockExplorerUrls: ["https://etherscan.io/"],
   },
-  "0xaa36a7": {
-    chainId: "0xaa36a7",
-    chainName: "Sepolia Testnet",
-    nativeCurrency: { name: "Sepolia Ether", symbol: "SEP", decimals: 18 },
-    rpcUrls: ["https://sepolia.infura.io/v3/"],
-    blockExplorerUrls: ["https://sepolia.etherscan.io/"],
+  "0x12c": {
+        chainId: "0x12c",
+        chainName: "zkSync Era Sepolia",
+        nativeCurrency: {
+            name: "Ether",
+            symbol: "ETH",
+            decimals: 18
+        },
+        rpcUrls: [
+            "https://sepolia.era.zksync.dev"
+        ],
+        blockExplorerUrls: [
+            "https://sepolia.explorer.zksync.io"
+        ]
   },
   "0x7a69": {
     chainId: "0x7a69",
@@ -68,7 +77,9 @@ const SUPPORTED_NETWORKS: Record<string, NetworkInfo> = {
 };
 
 // Expected network for the contract deployment
-const EXPECTED_CHAIN_ID = "0xaa36a7"; // Sepolia testnet
+//ZKSYNC ERA SEPOLIA - KARAN
+const EXPECTED_CHAIN_ID = "0x12c"; 
+
 
 export const Web3Provider: React.FC<{ children: ReactNode }> = ({
   children,
@@ -90,6 +101,11 @@ export const Web3Provider: React.FC<{ children: ReactNode }> = ({
   // Update network information
   const updateNetworkInfo = useCallback(
     (chainId: string) => {
+
+      console.log("Received chainId:", chainId);
+      console.log("Supported keys:", Object.keys(SUPPORTED_NETWORKS));
+      console.log("Lookup result:", SUPPORTED_NETWORKS[chainId]);
+
       setChainId(chainId);
       const networkInfo = getNetworkInfo(chainId);
       setNetworkName(networkInfo?.chainName || "Unknown Network");
@@ -420,7 +436,8 @@ export const Web3Provider: React.FC<{ children: ReactNode }> = ({
     refreshRole,
   ]);
 
-  const connectWallet = async () => {
+  // const connectWallet = async () => {
+  const connectWallet = async (): Promise<string | null> => {
     setConnecting(true);
     try {
       console.log("Web3Context: Connecting wallet...");
@@ -447,6 +464,7 @@ export const Web3Provider: React.FC<{ children: ReactNode }> = ({
       if (account) {
         console.log("Web3Context: Wallet connected successfully:", account);
         setAccount(account);
+
         setIsConnected(true);
 
         // Get user role with proper error handling
@@ -532,6 +550,7 @@ export const Web3Provider: React.FC<{ children: ReactNode }> = ({
             variant: "destructive",
           });
         }
+        return account;
       } else {
         console.error("Web3Context: Failed to get account after connection");
         throw new Error("Failed to get account");

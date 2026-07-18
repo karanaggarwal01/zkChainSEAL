@@ -107,12 +107,17 @@ const WalletManagement: React.FC = () => {
   const handleAddSepoliaNetwork = async () => {
     try {
       await addNetwork({
-        chainId: "0xaa36a7",
-        chainName: "Sepolia Testnet",
+        chainId: "0x12c", 
+        chainName:
+        "zkSync Era Sepolia", 
+        rpcUrls: ["https://sepolia.era.zksync.dev"], 
+        blockExplorerUrls: ["https://sepolia.explorer.zksync.io"],
         nativeCurrency: { name: "Sepolia Ether", symbol: "SEP", decimals: 18 },
-        rpcUrls: ["https://sepolia.infura.io/v3/"],
-        blockExplorerUrls: ["https://sepolia.etherscan.io/"],
-      });
+        // chainId: "0xaa36a7",
+        // chainName: "Sepolia Testnet",
+        // rpcUrls: ["https://sepolia.infura.io/v3/"],
+        // blockExplorerUrls: ["https://sepolia.etherscan.io/"],
+      }); 
       toast({
         title: "Network Added",
         description: "Sepolia testnet has been added to MetaMask.",

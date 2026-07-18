@@ -52,55 +52,43 @@ const LoginForm = () => {
   };
 
   const handleMetaMaskLogin = async () => {
-    setIsLoading(true);
+  setIsLoading(true);
 
-    try {
-      // First connect to MetaMask
-      await connectWallet();
+  try {
+    // connectWallet now RETURNS the wallet address
+    const wallet = await connectWallet();
 
-      // Wait for Web3Context to update state
-      setTimeout(async () => {
-        try {
-          if (isConnected && account) {
-            // Now authenticate with the wallet using simplified flow
-            const success = await loginWithWallet(account);
-
-            if (!success) {
-              toast({
-                title: "Authentication failed",
-                description: "Could not authenticate with the connected wallet",
-                variant: "destructive",
-              });
-            }
-          } else {
-            toast({
-              title: "Connection incomplete",
-              description: "Please ensure MetaMask is installed and unlocked.",
-              variant: "destructive",
-            });
-          }
-        } catch (authError) {
-          console.error("Authentication error:", authError);
-          toast({
-            title: "Authentication failed",
-            description: "Could not authenticate with the connected wallet",
-            variant: "destructive",
-          });
-        } finally {
-          setIsLoading(false);
-        }
-      }, 1000); // Give time for Web3Context state to update
-    } catch (error) {
-      console.error("MetaMask login error:", error);
+    if (!wallet) {
       toast({
         title: "Connection failed",
-        description:
-          "Could not connect to MetaMask. Please ensure MetaMask is installed and try again.",
+        description: "Could not connect to MetaMask.",
         variant: "destructive",
       });
-      setIsLoading(false);
+      return;
     }
-  };
+
+    const success = await loginWithWallet(wallet);
+
+    if (!success) {
+      toast({
+        title: "Authentication failed",
+        description: "Could not authenticate with the connected wallet.",
+        variant: "destructive",
+      });
+    }
+  } catch (error) {
+    console.error("MetaMask login error:", error);
+
+    toast({
+      title: "Connection failed",
+      description:
+        "Could not connect to MetaMask. Please ensure it is unlocked.",
+      variant: "destructive",
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   if (showForgotPassword) {
     return <ForgotPasswordForm onBack={() => setShowForgotPassword(false)} />;

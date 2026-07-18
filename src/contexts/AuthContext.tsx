@@ -68,6 +68,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       if (result.success && result.user) {
         setUser(result.user);
 
+        // Give React one render cycle before navigating
+        await new Promise(resolve => setTimeout(resolve, 100));
+
         toast({
           title: "Login Successful",
           description: `Welcome back, ${result.user.name}`,
@@ -76,7 +79,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         if (result.requiresSetup) {
           navigate("/bootstrap");
         } else {
-          navigate("/dashboard");
+          setTimeout(() => {
+              navigate("/dashboard");
+          }, 100);
         }
 
         return true;
@@ -109,6 +114,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       if (result.success && result.user) {
         setUser(result.user);
 
+        // Give React one render cycle before navigating
+        await new Promise(resolve => setTimeout(resolve, 100));
+
         toast({
           title: "Authentication Successful",
           description: `Welcome, ${result.user.roleTitle}!`,
@@ -117,7 +125,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         if (result.requiresSetup) {
           navigate("/bootstrap");
         } else {
-          navigate("/dashboard");
+          setTimeout(() => {
+              navigate("/dashboard");
+          }, 100);
         }
 
         return true;

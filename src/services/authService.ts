@@ -144,9 +144,16 @@ class AuthService {
       // Clear any existing authentication state
       await this.clearAuthState();
 
+      //testing - karan
+      console.log("LOGIN wallet:", walletAddress);
+
       // Get role from database (primary source of truth)
       const dbRole =
         await roleManagementService.getRoleForWallet(walletAddress);
+
+      //testing - karan
+      console.log("DB role returned:", dbRole);
+
 
       if (dbRole === Role.None) {
         // Check if this wallet is the contract owner
