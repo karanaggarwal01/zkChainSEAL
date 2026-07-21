@@ -1,140 +1,193 @@
 # Security Policy
 
-## Supported Versions
-
-Security updates are provided for the following versions of Forensic Ledger Guardian:
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 0.x.x   | :white_check_mark: |
-
-_Note: This project is in active development. All versions receive security updates._
-
-## Security Features
-
-Forensic Ledger Guardian implements multiple layers of security:
-
-### Blockchain Security
-
-- Smart contract access controls with role-based permissions
-- Immutable evidence records on Ethereum blockchain
-- Multi-signature requirements for critical operations
-- Emergency pause functionality for system-wide security incidents
-
-### Data Protection
-
-- AES-256 encryption for all stored evidence files
-- Cryptographic hashing (SHA-256) for integrity verification
-- Secure key management and rotation
-- End-to-end encryption for sensitive communications
-
-### Application Security
-
-- Input validation and sanitization
-- SQL injection prevention
-- Cross-site scripting (XSS) protection
-- Secure authentication with Supabase
-- Rate limiting on API endpoints
-
-## Reporting a Vulnerability
-
-**DO NOT** create public GitHub issues for security vulnerabilities.
-
-### Private Reporting
-
-Please report security vulnerabilities privately to:
-
-- **Email**: [Create a private vulnerability report on GitHub](https://github.com/aaravmahajanofficial/forensic-ledger-guardian/security/advisories/new)
-- **Alternative**: Contact the maintainer directly via GitHub DM
-
-### What to Include
-
-When reporting a vulnerability, please include:
-
-1. **Description** of the vulnerability
-2. **Steps to reproduce** the issue
-3. **Potential impact** assessment
-4. **Suggested mitigation** (if any)
-5. **Your contact information** for follow-up
-
-### Response Timeline
-
-- **Initial Response**: Within 48 hours
-- **Vulnerability Assessment**: Within 7 days
-- **Security Fix**: Critical issues within 7 days, others within 30 days
-- **Public Disclosure**: After fix is deployed and tested
-
-### Responsible Disclosure
-
-We follow responsible disclosure practices:
-
-1. Report received and acknowledged
-2. Vulnerability investigated and validated
-3. Fix developed and tested
-4. Security advisory published
-5. Credits given to reporter (if desired)
-
-## Security Best Practices
-
-### For Developers
-
-- Keep dependencies updated
-- Follow secure coding practices
-- Use static analysis tools
-- Conduct code reviews
-- Test security controls
-
-### For Users
-
-- Use hardware wallets for production deployments
-- Keep private keys secure and never share them
-- Regularly update the application
-- Monitor for suspicious activity
-- Follow principle of least privilege
-
-### For Deployments
-
-- Use HTTPS/TLS for all communications
-- Enable database encryption at rest
-- Implement proper firewall rules
-- Regular security audits and penetration testing
-- Monitor system logs for anomalies
-
-## Known Security Considerations
-
-### Smart Contract Risks
-
-- Gas limit vulnerabilities
-- Reentrancy attacks (mitigated with checks-effects-interactions pattern)
-- Oracle manipulation (not applicable - no external oracles used)
-
-### IPFS Storage
-
-- Content addressing ensures integrity
-- Encryption provides confidentiality
-- Access control through smart contracts
-
-### Web3 Integration
-
-- Private key management responsibility lies with users
-- MetaMask and wallet security dependencies
-- Transaction replay protection
-
-## Security Audits
-
-- **Smart Contract**: Awaiting professional audit
-- **Application Security**: Ongoing internal reviews
-- **Infrastructure**: Regular security assessments
-
-## Compliance
-
-This system is designed with forensic evidence handling in mind and aims to meet:
-
-- Chain of custody requirements
-- Evidence integrity standards
-- Access control regulations
-- Data protection requirements
+Security is an important aspect of zkChainSEAL. Since this project deals with blockchain-based evidence management, protecting secrets, ensuring integrity, and following secure development practices are essential.
 
 ---
 
-For questions about security practices or to report non-sensitive security concerns, please open a regular GitHub issue.
+# Supported Branches
+
+| Branch | Status |
+|---------|--------|
+| zksync-integration | ✅ Active Development |
+| ethereum-baseline | ✅ Maintenance Only |
+
+Security fixes are primarily applied to the active development branch.
+
+---
+
+# Reporting a Vulnerability
+
+Please **DO NOT** create public GitHub issues for security vulnerabilities.
+
+Instead, report vulnerabilities privately by:
+
+- Opening a GitHub Security Advisory (preferred)
+- Contacting the maintainer through GitHub
+
+Please include:
+
+- Description
+- Steps to reproduce
+- Potential impact
+- Suggested mitigation (if known)
+
+---
+
+# Response Policy
+
+Target response times:
+
+| Severity | Initial Response |
+|------------|----------------|
+| Critical | Within 48 hours |
+| High | Within 5 days |
+| Medium | Within 7 days |
+| Low | Best effort |
+
+---
+
+# Security Best Practices
+
+## Secrets
+
+Never commit:
+
+- `.env`
+- Private keys
+- Wallet mnemonics
+- Pinata JWTs
+- Supabase service keys
+- API keys
+- RPC credentials
+
+All sensitive information should be stored using environment variables.
+
+---
+
+## Smart Contracts
+
+Current security measures include:
+
+- Role-based access control
+- Immutable evidence records
+- Event logging
+- Evidence hash verification
+- Controlled state transitions
+
+Future improvements include:
+
+- External smart contract audits
+- Formal verification
+- Zero-Knowledge proof integration
+
+---
+
+## Backend Security
+
+The backend should:
+
+- Validate all user input
+- Handle errors safely
+- Never expose internal exceptions
+- Use secure environment variables
+- Limit access to privileged operations
+
+---
+
+## Frontend Security
+
+- Never store secrets in frontend code.
+- Always verify connected wallet information.
+- Validate user inputs before submission.
+- Keep dependencies updated.
+
+---
+
+## IPFS Security
+
+Evidence files are stored using IPFS.
+
+Security considerations include:
+
+- Content-addressable storage
+- Hash verification
+- Immutable content identifiers
+
+Sensitive files should be encrypted before permanent decentralized storage if confidentiality is required.
+
+---
+
+## Wallet Security
+
+Developers and users should:
+
+- Use separate wallets for development and production
+- Never share private keys
+- Keep seed phrases offline
+- Verify transactions before signing
+- Prefer hardware wallets for production deployments
+
+---
+
+# Current Limitations
+
+This project is intended for research and educational purposes.
+
+Current limitations include:
+
+- No formal third-party smart contract audit
+- No production security certification
+- Testnet deployment only
+- Experimental zkSync integration
+
+Do not deploy this project to production environments handling sensitive real-world evidence without a comprehensive security review.
+
+---
+
+# Dependency Security
+
+Before opening a Pull Request:
+
+Run:
+
+```bash
+npm audit
+```
+
+and
+
+```bash
+forge test
+```
+
+Address critical dependency vulnerabilities whenever possible.
+
+---
+
+# Responsible Disclosure
+
+We follow responsible disclosure practices.
+
+The general process is:
+
+1. Vulnerability reported privately
+2. Issue reproduced
+3. Fix developed
+4. Security update released
+5. Public disclosure (if appropriate)
+
+---
+
+# Security Recommendations
+
+Developers should:
+
+- Keep dependencies updated
+- Review smart contract changes carefully
+- Follow secure coding practices
+- Avoid committing sensitive information
+- Perform regular code reviews
+
+---
+
+Thank you for helping improve the security of zkChainSEAL.

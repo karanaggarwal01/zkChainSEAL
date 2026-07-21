@@ -13,7 +13,7 @@ We pledge to act and interact in ways that contribute to an open, welcoming,
 diverse, inclusive, and healthy community.
 
 ## Our Standards
-
+ 
 Examples of behavior that contributes to a positive environment for our
 community include:
 
@@ -58,11 +58,9 @@ representative at an online or offline event.
 
 ## Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to the community leaders responsible for enforcement at
-aaravmahajan2003@gmail.com.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to: karanagg2005@gmail.com.
+You can aslso contact the project maintainer through GitHub.
 All complaints will be reviewed and investigated promptly and fairly.
-
 All community leaders are obligated to respect the privacy and security of the
 reporter of any incident.
 
