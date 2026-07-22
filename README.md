@@ -33,7 +33,6 @@ The repository currently serves as both:
 - an open-source blockchain application, and
 - a research prototype for secure blockchain-based digital evidence management.
 
----
 
 > **Project Status**
 >
@@ -43,7 +42,6 @@ The repository currently serves as both:
 >
 > The **`ethereum-baseline`** branch is maintained as a stable reference implementation.
 
----
 
 # Table of Contents
 
@@ -82,9 +80,8 @@ The project was initially developed on Ethereum Sepolia to demonstrate secure ev
 
 zkChainSEAL serves as both an open-source software project and a research prototype exploring the application of blockchain technology for secure digital evidence management.
 
----
 
-# Motivation
+## Motivation
 
 Digital forensic investigations demand complete confidence that evidence has not been modified from the moment it is collected until it is presented in court. Even a minor alteration can compromise the credibility and admissibility of evidence, making secure evidence preservation an essential requirement.
 
@@ -104,9 +101,8 @@ zkChainSEAL overcomes this limitation by combining blockchain with decentralized
 
 This architecture provides a practical balance between decentralization, scalability, security, and cost efficiency.
 
----
 
-# Problem Statement
+## Problem Statement
 
 Digital evidence management systems must satisfy several fundamental security and operational requirements:
 
@@ -121,9 +117,8 @@ Conventional database-driven solutions address some of these requirements but of
 
 zkChainSEAL proposes a blockchain-based architecture that combines smart contracts, decentralized storage, and cryptographic verification to address these challenges.
 
----
 
-# Project Objectives
+## Project Objectives
 
 The primary objectives of zkChainSEAL are:
 
@@ -135,9 +130,8 @@ The primary objectives of zkChainSEAL are:
 - Provide an extensible research platform for evaluating blockchain technologies in digital forensics.
 - Demonstrate a practical architecture that balances security, scalability, transparency, and cost.
 
----
 
-# Why Blockchain?
+## Why Blockchain?
 
 Blockchain technology provides several properties that directly address the requirements of secure evidence management:
 
@@ -152,9 +146,8 @@ Blockchain technology provides several properties that directly address the requ
 
 Rather than replacing existing evidence management systems, blockchain acts as an immutable trust layer that strengthens the integrity and verifiability of stored evidence.
 
----
 
-# Why zkSync Era?
+## Why zkSync Era?
 
 Ethereum provides strong security guarantees but transaction fees and throughput limitations can become significant as application usage increases.
 
@@ -176,7 +169,6 @@ This dual implementation allows direct comparison between a conventional Ethereu
 
 zkChainSEAL combines blockchain technology, decentralized storage, and modern web technologies to provide a secure and transparent platform for digital evidence management. The system is designed to ensure evidence integrity while remaining scalable, cost-efficient, and easy to extend.
 
----
 
 ## Core Features
 
@@ -184,19 +176,16 @@ zkChainSEAL combines blockchain technology, decentralized storage, and modern we
 
 Every piece of digital evidence is registered on the blockchain through Ethereum-compatible smart contracts. Instead of relying on centralized records, the blockchain acts as an immutable ledger that permanently records evidence metadata and cryptographic hashes.
 
----
 
 ### Tamper-Evident Integrity Verification
 
 Each evidence file is processed using cryptographic hashing before registration. During verification, the evidence is hashed again and compared with the immutable blockchain record, allowing any modification to be detected immediately.
 
----
 
 ### Decentralized Evidence Storage
 
 Evidence files are stored using the **InterPlanetary File System (IPFS)** rather than directly on the blockchain. This approach provides content-addressable storage while significantly reducing blockchain storage costs and improving scalability.
 
----
 
 ### Evidence Lifecycle Management
 
@@ -208,7 +197,6 @@ The platform supports the complete lifecycle of digital evidence, including:
 - Integrity verification
 - Retrieval by authorized users
 
----
 
 ## Security Features
 
@@ -216,7 +204,6 @@ The platform supports the complete lifecycle of digital evidence, including:
 
 Every blockchain transaction creates a permanent and chronological record of evidence-related operations, providing an auditable chain of custody throughout the investigation process.
 
----
 
 ### Role-Based Access Control (RBAC)
 
@@ -229,19 +216,16 @@ Examples of supported roles include:
 - Forensic Officer
 - Authorized Personnel
 
----
 
 ### Wallet-Based Authentication
 
 User authentication is performed through **MetaMask**, eliminating traditional password-based authentication and enabling blockchain-native identity verification.
 
----
 
 ### Secure Configuration Management
 
 Sensitive credentials are managed through environment variables instead of hardcoded values. The repository includes `.env.example` templates while excluding actual configuration files from version control.
 
----
 
 ## Blockchain Features
 
@@ -249,7 +233,6 @@ Sensitive credentials are managed through environment variables instead of hardc
 
 The platform is fully compatible with Ethereum Virtual Machine (EVM) networks, enabling deployment on Ethereum Sepolia as well as Layer-2 networks such as zkSync Era.
 
----
 
 ### zkSync Era Integration
 
@@ -262,19 +245,16 @@ The project extends the original Ethereum implementation by integrating **zkSync
 
 while preserving compatibility with existing Ethereum smart contracts.
 
----
 
 ### Smart Contract Automation
 
 Business logic related to evidence registration, verification, and authorization is implemented within Solidity smart contracts, ensuring consistent and transparent execution.
 
----
 
 ### Cryptographic Verification
 
 The platform relies on cryptographic hash functions to generate unique fingerprints for every evidence file, enabling deterministic integrity verification without exposing the original data on-chain.
 
----
 
 ## Developer Features
 
@@ -291,7 +271,6 @@ The project is built using a modern and widely adopted development stack:
 - Supabase
 - IPFS
 
----
 
 ### Modular Architecture
 
@@ -305,7 +284,6 @@ The repository follows a modular structure that separates:
 
 This organization simplifies maintenance and encourages future extensions.
 
----
 
 ### Open-Source Development
 
@@ -319,7 +297,6 @@ The project follows standard open-source development practices, including:
 
 making it easy for new contributors to participate.
 
----
 
 ## Research Contributions
 
@@ -385,7 +362,6 @@ The overall system architecture is illustrated below.
           +--------------------+
 ```
 
----
 
 # Architecture Components
 
@@ -407,7 +383,6 @@ Its primary responsibilities include:
 
 The frontend never stores sensitive blockchain credentials or private keys.
 
----
 
 ## 2. Backend Layer
 
@@ -426,7 +401,6 @@ Responsibilities include:
 
 Keeping these responsibilities off-chain reduces gas costs while maintaining flexibility.
 
----
 
 ## 3. Smart Contract Layer
 
@@ -444,7 +418,6 @@ Major responsibilities include:
 
 Since blockchain data cannot be modified after confirmation, the smart contracts provide strong guarantees regarding evidence integrity.
 
----
 
 ## 4. Blockchain Layer
 
@@ -465,7 +438,6 @@ The project currently supports:
 
 allowing direct comparison between Layer-1 and Layer-2 deployments.
 
----
 
 ## 5. IPFS Storage Layer
 
@@ -482,7 +454,6 @@ Benefits include:
 
 Only the CID and corresponding evidence hash are associated with blockchain records.
 
----
 
 ## 6. Metadata Layer
 
@@ -499,9 +470,8 @@ Examples include:
 
 Since this information changes more frequently than blockchain records, storing it in a database provides significantly better performance and flexibility.
 
----
 
-# Data Flow
+## Data Flow
 
 The following sequence summarizes how evidence moves through the system.
 
@@ -536,9 +506,8 @@ Metadata stored in Supabase
 Evidence successfully registered
 ```
 
----
 
-# Technology Stack
+## Technology Stack
 
 | Layer | Technology | Purpose |
 |--------|------------|---------|
@@ -552,9 +521,8 @@ Evidence successfully registered
 | Storage | IPFS + Pinata | Evidence Storage |
 | Database | Supabase | Metadata Management |
 
----
 
-# Design Decisions
+## Design Decisions
 
 The architecture of zkChainSEAL was guided by practical trade-offs between security, scalability, performance, and development simplicity.
 
@@ -562,33 +530,28 @@ The architecture of zkChainSEAL was guided by practical trade-offs between secur
 
 Storing complete evidence files on the blockchain is prohibitively expensive and unnecessary for integrity verification. Recording only cryptographic hashes provides tamper detection while keeping transaction costs low.
 
----
 
 ### Why use IPFS?
 
 IPFS enables decentralized, content-addressable storage for large digital files. It complements blockchain by handling storage efficiently while preserving data integrity through immutable content identifiers.
 
----
 
 ### Why use Supabase?
 
 Metadata such as FIR information, user profiles, and application state changes frequently. A relational database provides faster querying and easier management than storing such data on-chain.
 
----
 
 ### Why migrate to zkSync Era?
 
 Ethereum provides strong security guarantees but can become costly for frequent transactions. zkSync Era significantly reduces gas fees and improves throughput while remaining fully compatible with Ethereum smart contracts.
 
----
 
 ### Why Foundry?
 
 Foundry provides a modern Solidity development environment with fast compilation, efficient testing, scripting capabilities, and seamless deployment support.
 
----
 
-# Repository Structure
+## Repository Structure
 
 ```text
 zkChainSEAL/
@@ -607,9 +570,8 @@ zkChainSEAL/
 └── LICENSE
 ```
 
----
 
-# Branch Strategy
+## Branch Strategy
 
 The repository follows a two-branch development strategy.
 
@@ -626,9 +588,8 @@ This strategy enables experimentation with Layer-2 technologies while preserving
 
 This guide will help you set up zkChainSEAL locally for development and testing.
 
----
 
-# Prerequisites
+## Prerequisites
 
 Before you begin, ensure the following software is installed on your system.
 
@@ -639,7 +600,7 @@ Before you begin, ensure the following software is installed on your system.
 | Git | Latest |
 | Foundry | Latest Stable |
 | MetaMask | Browser Extension |
-| Docker *(Optional)* | Latest |
+
 
 You should also have access to:
 
@@ -649,9 +610,8 @@ You should also have access to:
 - A Supabase project
 - A wallet funded with Sepolia ETH (or zkSync Era testnet ETH)
 
----
 
-# Clone the Repository
+## Clone the Repository
 
 ```bash
 git clone https://github.com/karanaggarwal01/zkChainSEAL.git
@@ -659,9 +619,8 @@ git clone https://github.com/karanaggarwal01/zkChainSEAL.git
 cd zkChainSEAL
 ```
 
----
 
-# Install Dependencies
+## Install Dependencies
 
 Install frontend dependencies.
 
@@ -691,17 +650,15 @@ Compile smart contracts.
 forge build
 ```
 
----
 
-# Environment Configuration
+## Environment Configuration
 
 The project uses environment variables for all sensitive configuration.
 
 Never commit actual `.env` files to version control.
 
----
 
-## Frontend Environment
+### Frontend Environment
 
 Create a `.env` file in the project root.
 
@@ -718,9 +675,8 @@ VITE_CONTRACT_ADDRESS=
 VITE_CHAIN_ID=
 ```
 
----
 
-## Backend Environment
+### Backend Environment
 
 Create another `.env` inside the `ipfs-backend` directory.
 
@@ -744,11 +700,10 @@ CONTRACT_ADDRESS=
 >
 > Never expose private keys, API tokens, or service credentials. The provided `.env.example` files should be used as templates only.
 
----
 
-# Running the Application
+## Running the Application
 
-## Start the Frontend
+### Start the Frontend
 
 ```bash
 npm run dev
@@ -760,9 +715,8 @@ The React application will be available at:
 http://localhost:5173
 ```
 
----
 
-## Start the Backend
+### Start the Backend
 
 Open another terminal.
 
@@ -778,9 +732,8 @@ The backend will start at:
 http://localhost:4000
 ```
 
----
 
-# Smart Contract Development
+### Smart Contract Development
 
 Compile contracts.
 
@@ -812,9 +765,8 @@ Clean build artifacts.
 forge clean
 ```
 
----
 
-# MetaMask Configuration
+### MetaMask Configuration
 
 Connect MetaMask to the appropriate test network.
 
@@ -829,9 +781,8 @@ Ensure the connected wallet:
 - Is connected to the correct network
 - Matches the configured contract deployment
 
----
 
-# Project Structure After Setup
+## Project Structure After Setup
 
 Once everything is configured, your local workspace should resemble the following.
 
@@ -854,9 +805,8 @@ zkChainSEAL/
 └── README.md
 ```
 
----
 
-# Verification Checklist
+## Verification Checklist
 
 Before using the application, verify the following:
 
@@ -871,9 +821,8 @@ Before using the application, verify the following:
 - Evidence uploads to IPFS.
 - Blockchain transactions are confirmed.
 
----
 
-# Common Development Commands
+## Common Development Commands
 
 | Command | Description |
 |----------|-------------|
@@ -885,9 +834,8 @@ Before using the application, verify the following:
 | `forge clean` | Remove build artifacts |
 | `node backendfinal.js` | Start backend server |
 
----
 
-# Troubleshooting
+## Troubleshooting
 
 ### MetaMask cannot connect
 
@@ -896,7 +844,6 @@ Before using the application, verify the following:
 - Confirm the wallet is unlocked.
 - Check that the contract address matches the deployed network.
 
----
 
 ### IPFS upload fails
 
@@ -904,7 +851,6 @@ Before using the application, verify the following:
 - Ensure the backend server is running.
 - Confirm the JWT token is valid.
 
----
 
 ### Smart contracts fail to compile
 
@@ -918,7 +864,6 @@ forge install
 forge build
 ```
 
----
 
 ### Backend cannot start
 
@@ -929,7 +874,6 @@ Verify:
 - Contract address is correct
 - Required API keys are configured
 
----
 
 ### Frontend cannot communicate with backend
 
@@ -946,9 +890,8 @@ Confirm:
 
 This section provides an overview of the core blockchain components, security mechanisms, and evidence processing workflow implemented in zkChainSEAL.
 
----
 
-# Smart Contract Architecture
+## Smart Contract Architecture
 
 The smart contracts serve as the trust layer of the application. They maintain immutable evidence records, enforce authorization rules, and provide cryptographically verifiable evidence registration.
 
@@ -965,7 +908,6 @@ The contracts are responsible for:
 
 Every successful registration produces an on-chain transaction that becomes part of the permanent blockchain history.
 
----
 
 ## Smart Contract Responsibilities
 
@@ -976,13 +918,12 @@ Every successful registration produces an on-chain transaction that becomes part
 | Verification Logic | Validates evidence integrity using cryptographic hashes |
 | Event Logging | Emits blockchain events for auditing and traceability |
 
----
 
-# Security Model
+## Security Model
 
 Security is a primary design goal of zkChainSEAL. Rather than relying on a single trusted authority, the platform combines blockchain immutability, cryptographic hashing, decentralized storage, and wallet-based authentication to strengthen the integrity and transparency of digital evidence management.
 
-## Role-Based Access Control
+### Role-Based Access Control
 
 Access to sensitive operations is governed by smart contracts.
 
@@ -995,17 +936,15 @@ Typical roles include:
 
 Only users with the appropriate permissions can perform operations such as evidence registration or management.
 
----
 
-## Wallet Authentication
+### Wallet Authentication
 
 The platform uses **MetaMask** for authentication.
 
 Instead of usernames and passwords, users authenticate by signing blockchain transactions with their wallet. This approach eliminates password storage while providing cryptographic proof of identity.
 
----
 
-## Evidence Integrity
+### Evidence Integrity
 
 Every uploaded evidence file is processed to generate a cryptographic hash.
 
@@ -1019,9 +958,8 @@ During verification:
 
 If both hashes match, the evidence has remained unchanged since registration.
 
----
 
-## Immutable Audit Trail
+### Immutable Audit Trail
 
 Every blockchain transaction contributes to a permanent audit trail containing:
 
@@ -1033,9 +971,8 @@ Every blockchain transaction contributes to a permanent audit trail containing:
 
 Because blockchain records cannot be modified retrospectively, the audit trail provides strong evidence of system activity over time.
 
----
 
-## Secure Secret Management
+### Secure Secret Management
 
 Sensitive configuration values such as API keys, private keys, and service credentials are never committed to version control.
 
@@ -1046,9 +983,8 @@ The project uses:
 
 to separate local configuration from the public repository.
 
----
 
-# Evidence Lifecycle
+## Evidence Lifecycle
 
 The following workflow summarizes how digital evidence moves through the system.
 
@@ -1082,9 +1018,8 @@ Integrity Confirmation
 
 Each stage is designed to ensure that evidence remains authentic, traceable, and independently verifiable throughout its lifecycle.
 
----
 
-# Contributing
+## Contributing
 
 Contributions are welcome and greatly appreciated.
 
@@ -1105,9 +1040,8 @@ Please review the following documents before contributing:
 5. Open a Pull Request.
 6. Participate in the review process.
 
----
 
-# Current Limitations
+## Current Limitations
 
 zkChainSEAL is currently an active research prototype and has several known limitations.
 
@@ -1119,9 +1053,8 @@ zkChainSEAL is currently an active research prototype and has several known limi
 
 These limitations provide opportunities for future development and research.
 
----
 
-# Future Roadmap
+## Future Roadmap
 
 The project will continue evolving with new features and research directions, including:
 
@@ -1152,9 +1085,8 @@ The project will continue evolving with new features and research directions, in
 - Scalability benchmarking
 - Integration of emerging blockchain technologies
 
----
 
-# Research Context
+## Research Context
 
 zkChainSEAL is an open-source research prototype developed to explore the application of blockchain technology in digital evidence management.
 
@@ -1185,4 +1117,3 @@ See the [LICENSE](LICENSE) file for complete licensing information.
 If you have questions, suggestions, or would like to contribute, feel free to open an issue or submit a pull request.
 
 - **GitHub:** https://github.com/karanaggarwal01
-- **Repository:** https://github.com/karanaggarwal01/zkChainSEAL
